@@ -7,30 +7,28 @@ using System.Threading.Tasks;
 /// 1 v 1 battle Arena
 /// Created by ChaosDrakner
 /// A game in the making where the player goes against an ememy in one on one combat.
-/// To Do add in a turn choice system for the player, currently the player and enemy just attack back and forth until someone reaches zero HP or less.
-/// Add victory counter, maybe allow weapon changes.
 /// 
 /// </summary>
 namespace _1_v_1_text_game
 {
     class Program
     {
-
         static void Main(string[] args)
         {
 
-            int weaponPick, minDMG, maxDMG, critMultiplier;
+            string weaponPick;
+            int minDMG, maxDMG, critMultiplier;
             Console.WriteLine("1: Dagger 4-8 dmg 4x Critical Multiplier");
             Console.WriteLine("2: Short Sword 6-12 3x Critical Multiplier ");
             Console.WriteLine("3: Long Sword 8-16 2x Critical Multiplier");
             Console.Write("Please choose your weapon: ");
 
-            weaponPick = Convert.ToInt16(Console.ReadLine());
+            weaponPick = Console.ReadLine();
 
             //Weapon choice for the player, setting the minDMG, maxDMG, and crit Multiplier
             switch (weaponPick)
             {
-                case 1:
+                case "1":
                     minDMG = 4;
                     maxDMG = 8;
                     critMultiplier = 4;
@@ -39,7 +37,7 @@ namespace _1_v_1_text_game
                     GamePlay(minDMG, maxDMG, critMultiplier);
                     break;
 
-                case 2:
+                case "2":
                     minDMG = 6;
                     maxDMG = 12;
                     critMultiplier = 3;
@@ -48,7 +46,7 @@ namespace _1_v_1_text_game
                     GamePlay(minDMG, maxDMG, critMultiplier);
                     break;
 
-                case 3:
+                case "3":
                     minDMG = 8;
                     maxDMG = 16;
                     critMultiplier = 2;
@@ -80,9 +78,19 @@ namespace _1_v_1_text_game
 
             if (critCheck >= 15)
             {
-                totalDmg = totalDmg * critMultiplier;
-                Console.WriteLine("That was a critical strike! roll was " + critCheck);
-                return totalDmg;
+                if (critCheck == 20) //Adding this in do give a natural 20 something extra.
+                {
+                    critMultiplier = critMultiplier * critMultiplier;
+                    totalDmg = totalDmg * critMultiplier;
+                    Console.WriteLine("That was a critical strike! roll was a NAT 20!");
+                    return totalDmg;
+                }
+                else
+                {
+                    totalDmg = totalDmg * critMultiplier;
+                    Console.WriteLine("That was a critical strike! roll was " + critCheck);
+                    return totalDmg;
+                }
             }
             else
             {
@@ -96,23 +104,43 @@ namespace _1_v_1_text_game
                 int EnemyHP = 100;
                 int PlayerHP = 100;
                 int enemyDMG, playerDMG;
-                bool GameOver = false;
-                bool PlayerWin = false;
+                string playerChoice;
+                bool GameOver = false, PlayerWin = false;
 
 
-                ///Actual combat code, once it is done will tell the player if they won or lost.
+                ///Gameplay block starts here.
                 do
                 {
+                Console.Write("Please Select an action. 1: Attack 2: Defend  ");
+                playerChoice = Console.ReadLine();
+
+                switch (playerChoice)
+                {
+                    case "1": // Case 1 if the player choses this will attack as normal.
+                        playerDMG = damage_calc(minDMG, maxDMG, critMultiplier);
+                        EnemyHP = EnemyHP - playerDMG;
+                        Console.WriteLine("You delt " + playerDMG + " to the enemy. Enemy HP left " + EnemyHP);
+                        enemyDMG = damage_calc(1, 10, 2);
+                        PlayerHP = PlayerHP - enemyDMG;
+                        Console.WriteLine("The enemy hits you for " + enemyDMG + " reducing you to " + PlayerHP);
+                        break;
+
+                    case "2": // Case 2 if the player chooses this, will take half damage from the enemy
+                        Console.WriteLine("You prepare to dodge the attack!");
+                        enemyDMG = damage_calc(1, 10, 2);
+                        enemyDMG = enemyDMG / 2; //Dividing the damage in half to start. Might chance it to be random later
+                        PlayerHP = PlayerHP - enemyDMG;
+                        Console.WriteLine("The enemy hits you for " + enemyDMG + " reducing you to " + PlayerHP);
+                        break;
 
 
-                    playerDMG = damage_calc(minDMG, maxDMG, critMultiplier);
-                    EnemyHP = EnemyHP - playerDMG;
-                    Console.WriteLine("You delt " + playerDMG + " to the enemy. Enemy HP left " + EnemyHP);
-                    enemyDMG = damage_calc(1, 10, 2);
-
-                    PlayerHP = PlayerHP - enemyDMG;
-
-                    Console.WriteLine("The enemy hit back for " + enemyDMG + " reducing you to " + PlayerHP);
+                    default:// Player fails to make a vaild choice they just stand there and take the hit.
+                        Console.WriteLine("You just stand there and take the attack.");
+                        enemyDMG = damage_calc(1, 10, 2);
+                        PlayerHP = PlayerHP - enemyDMG;
+                        Console.WriteLine("The enemy hits you for " + enemyDMG + " reducing you to " + PlayerHP);
+                        break;
+                }
 
 
                     if (EnemyHP <= 0 & PlayerHP >= 1)
