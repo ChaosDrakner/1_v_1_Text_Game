@@ -13,7 +13,7 @@ namespace _1_v_1_text_game
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main(int playerChoice)
         {
 
             string weaponPick;
@@ -173,5 +173,30 @@ namespace _1_v_1_text_game
                     Console.ReadKey();
                 }
             }
+        void Continue(int playerStreak)
+        {
+            string choice;
+            Console.Write("Would you like to continue? Y/N: ");
+            choice = Console.ReadLine();
+
+            if (choice == "y" || choice == "Y")
+            {
+                playerStreak++;
+                Console.WriteLine("Your winning streak is currently at " + playerStreak);
+                Main(playerStreak);
+            }
+
+            else if (choice == "n" || choice == "N")
+            {
+                Console.WriteLine("See you next time! Total win streak was " + playerStreak);
+                Console.ReadKey();
+            }
+            else
+            {
+                Console.WriteLine("Invalid response please try again.");
+                Continue(playerStreak);
+            }
+
+        }
     }
 }
