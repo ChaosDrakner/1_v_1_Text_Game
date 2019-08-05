@@ -13,7 +13,12 @@ namespace _1_v_1_text_game
 {
     class Program
     {
-        static void Main(int playerChoice)
+        static int Main(string[] args)
+        {
+            int playerStreak = 0;
+            Start_Menu(playerStreak)
+        }
+        static void Start_Menu(int playerStreak)
         {
 
             string weaponPick;
@@ -34,7 +39,7 @@ namespace _1_v_1_text_game
                     critMultiplier = 4;
                     Console.Write("You have chosen, Dagger! Good Luck!");
                     Console.ReadLine();
-                    GamePlay(minDMG, maxDMG, critMultiplier);
+                    GamePlay(minDMG, maxDMG, critMultiplier, playerStreak);
                     break;
 
                 case "2":
@@ -43,7 +48,7 @@ namespace _1_v_1_text_game
                     critMultiplier = 3;
                     Console.Write("You have chosen, Short Sword! Good Luck!");
                     Console.ReadLine();
-                    GamePlay(minDMG, maxDMG, critMultiplier);
+                    GamePlay(minDMG, maxDMG, critMultiplier, playerStreak);
                     break;
 
                 case "3":
@@ -52,7 +57,7 @@ namespace _1_v_1_text_game
                     critMultiplier = 2;
                     Console.Write("You have chosen, Long Sword! Good Luck!");
                     Console.ReadLine();
-                    GamePlay(minDMG, maxDMG, critMultiplier);
+                    GamePlay(minDMG, maxDMG, critMultiplier, playerStreak);
                     break;
 
                 default:
@@ -61,7 +66,7 @@ namespace _1_v_1_text_game
                     critMultiplier = 1;
                     Console.Write("You have chosen, bare fists! Good Luck!");
                     Console.ReadLine();
-                    GamePlay(minDMG, maxDMG, critMultiplier);
+                    GamePlay(minDMG, maxDMG, critMultiplier, playerStreak);
                     break;
             }
 
@@ -100,7 +105,7 @@ namespace _1_v_1_text_game
 
         }
  
-       static void GamePlay(int minDMG, int maxDMG, int critMultiplier) {
+       static void GamePlay(int minDMG, int maxDMG, int critMultiplier, int playerStreak) {
                 int EnemyHP = 100;
                 int PlayerHP = 100;
                 int enemyDMG, playerDMG;
@@ -147,11 +152,13 @@ namespace _1_v_1_text_game
                     {
                         GameOver = true;
                         PlayerWin = true;
+                        Continue(playerStreak);
                     }
 
                     else if (PlayerHP <= 0)
                     {
                         GameOver = true;
+                        Continue(0);
                     }
 
 
@@ -173,7 +180,7 @@ namespace _1_v_1_text_game
                     Console.ReadKey();
                 }
             }
-        void Continue(int playerStreak)
+        static void Continue(int playerStreak)
         {
             string choice;
             Console.Write("Would you like to continue? Y/N: ");
