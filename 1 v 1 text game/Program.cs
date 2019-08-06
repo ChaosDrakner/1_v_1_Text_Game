@@ -152,6 +152,7 @@ namespace _1_v_1_text_game
                     {
                         GameOver = true;
                         PlayerWin = true;
+                    playerStreak++;
                      
                     }
 
@@ -172,17 +173,17 @@ namespace _1_v_1_text_game
 
                     Console.WriteLine("You win!!!");
                     Console.ReadLine();
-                    Continue(playerStreak);
+                    ContinuePick(playerStreak);
                 }
 
                 else if (PlayerWin == false)
                 {
                     Console.WriteLine("You lose!");
                     Console.ReadLine();
-                    Continue(0);
+                    ContinuePick(0);
             }
             }
-        static void Continue(int playerStreak)
+        static void ContinuePick(int playerStreak)
         {
             string playerPick = " ";
             Console.Write("Would you like to continue? Y/N: ");
@@ -190,7 +191,6 @@ namespace _1_v_1_text_game
 
             if (playerPick == "y" || playerPick == "Y")
             {
-                playerStreak++;
                 Console.WriteLine("Your winning streak is currently at " + playerStreak);
                 Start_Menu(playerStreak);
             }
@@ -204,7 +204,7 @@ namespace _1_v_1_text_game
             {
                 Console.WriteLine("Invalid response please try again.");
                 Console.ReadLine();
-            //    Continue(playerStreak);
+                ContinuePick(playerStreak);
             }
 
         }

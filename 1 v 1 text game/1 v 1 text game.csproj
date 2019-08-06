@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{DA595919-B09B-4BB9-8850-5B150DF8C9F4}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <RootNamespace>_1_v_1_text_game</RootNamespace>
     <AssemblyName>1 v 1 text game</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
