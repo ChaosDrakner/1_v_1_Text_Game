@@ -13,10 +13,10 @@ namespace _1_v_1_text_game
 {
     class Program
     {
-        static int Main(string[] args)
+        static void Main(string[] args)
         {
-            int playerStreak = 0;
-            Start_Menu(playerStreak)
+            //int playerStreak = 0;
+            Start_Menu(0);
         }
         static void Start_Menu(int playerStreak)
         {
@@ -152,13 +152,13 @@ namespace _1_v_1_text_game
                     {
                         GameOver = true;
                         PlayerWin = true;
-                        Continue(playerStreak);
+                     
                     }
 
                     else if (PlayerHP <= 0)
                     {
                         GameOver = true;
-                        Continue(0);
+                     
                     }
 
 
@@ -171,37 +171,40 @@ namespace _1_v_1_text_game
                 {
 
                     Console.WriteLine("You win!!!");
-                    Console.ReadKey();
+                    Console.ReadLine();
+                    Continue(playerStreak);
                 }
 
                 else if (PlayerWin == false)
                 {
                     Console.WriteLine("You lose!");
-                    Console.ReadKey();
-                }
+                    Console.ReadLine();
+                    Continue(0);
+            }
             }
         static void Continue(int playerStreak)
         {
-            string choice;
+            string playerPick = " ";
             Console.Write("Would you like to continue? Y/N: ");
-            choice = Console.ReadLine();
+            playerPick = Console.ReadLine();
 
-            if (choice == "y" || choice == "Y")
+            if (playerPick == "y" || playerPick == "Y")
             {
                 playerStreak++;
                 Console.WriteLine("Your winning streak is currently at " + playerStreak);
-                Main(playerStreak);
+                Start_Menu(playerStreak);
             }
 
-            else if (choice == "n" || choice == "N")
+            else if (playerPick == "n" || playerPick == "N")
             {
                 Console.WriteLine("See you next time! Total win streak was " + playerStreak);
-                Console.ReadKey();
+                Console.ReadLine();
             }
             else
             {
                 Console.WriteLine("Invalid response please try again.");
-                Continue(playerStreak);
+                Console.ReadLine();
+            //    Continue(playerStreak);
             }
 
         }
