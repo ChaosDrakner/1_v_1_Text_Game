@@ -111,6 +111,9 @@ namespace _1_v_1_text_game
                 int enemyDMG, playerDMG;
                 string playerChoice;
                 bool GameOver = false, PlayerWin = false;
+            Random rand = new Random();
+            int enemyMin = rand.Next(1, 8);
+            int enemyMax = rand.Next(6, 15);
 
 
                 ///Gameplay block starts here.
@@ -125,14 +128,14 @@ namespace _1_v_1_text_game
                         playerDMG = damage_calc(minDMG, maxDMG, critMultiplier);
                         EnemyHP = EnemyHP - playerDMG;
                         Console.WriteLine("You delt " + playerDMG + " to the enemy. Enemy HP left " + EnemyHP);
-                        enemyDMG = damage_calc(1, 10, 2);
+                        enemyDMG = damage_calc(enemyMin, enemyMax, 2);
                         PlayerHP = PlayerHP - enemyDMG;
                         Console.WriteLine("The enemy hits you for " + enemyDMG + " reducing you to " + PlayerHP);
                         break;
 
                     case "2": // Case 2 if the player chooses this, will take half damage from the enemy
                         Console.WriteLine("You prepare to dodge the attack!");
-                        enemyDMG = damage_calc(1, 10, 2);
+                        enemyDMG = damage_calc(enemyMin, enemyMax, 2);
                         enemyDMG = enemyDMG / 2; //Dividing the damage in half to start. Might chance it to be random later
                         PlayerHP = PlayerHP - enemyDMG;
                         Console.WriteLine("The enemy hits you for " + enemyDMG + " reducing you to " + PlayerHP);
@@ -141,7 +144,7 @@ namespace _1_v_1_text_game
 
                     default:// Player fails to make a vaild choice they just stand there and take the hit.
                         Console.WriteLine("You just stand there and take the attack.");
-                        enemyDMG = damage_calc(1, 10, 2);
+                        enemyDMG = damage_calc(enemyMin, enemyMax, 2);
                         PlayerHP = PlayerHP - enemyDMG;
                         Console.WriteLine("The enemy hits you for " + enemyDMG + " reducing you to " + PlayerHP);
                         break;
@@ -186,6 +189,7 @@ namespace _1_v_1_text_game
         static void ContinuePick(int playerStreak)
         {
             string playerPick = " ";
+            Console.WriteLine("Current Victory Streak: " + playerStreak);
             Console.Write("Would you like to continue? Y/N: ");
             playerPick = Console.ReadLine();
 
