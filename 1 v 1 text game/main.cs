@@ -7,11 +7,20 @@ using System.Threading.Tasks;
 /// 1 v 1 battle Arena
 /// Created by ChaosDrakner
 /// A game in the making where the player goes against an ememy in one on one combat.
-/// 
+/// TO DO
+/// Add Random Enemy picker
+///  - Read from a text file, for easy updating
+///  - 
+/// Split program into multiple files
+/// Start GUI design move away from CLI
+/// Features to add after GUI is created
+///  - Ability to create a certificate of total win streak. Output as a image file.
+///  - Ability to Name their character, and weapon
+///  - Loot upgrade path after each match
 /// </summary>
 namespace _1_v_1_text_game
 {
-    class Program
+    class main
     {
         static void Main(string[] args)
         {
@@ -127,7 +136,7 @@ namespace _1_v_1_text_game
                         Console.WriteLine("You delt " + playerDMG + " to the enemy. Enemy HP left " + EnemyHP);
                         enemyDMG = damage_calc(1, 10, 2);
                         PlayerHP = PlayerHP - enemyDMG;
-                        Console.WriteLine("The enemy hits you for " + enemyDMG + " reducing you to " + PlayerHP);
+                        Console.WriteLine("The enemy hits you for " + enemyDMG + " reducing you to " + PlayerHP + "HP");
                         break;
 
                     case "2": // Case 2 if the player chooses this, will take half damage from the enemy
@@ -135,7 +144,7 @@ namespace _1_v_1_text_game
                         enemyDMG = damage_calc(1, 10, 2);
                         enemyDMG = enemyDMG / 2; //Dividing the damage in half to start. Might chance it to be random later
                         PlayerHP = PlayerHP - enemyDMG;
-                        Console.WriteLine("The enemy hits you for " + enemyDMG + " reducing you to " + PlayerHP);
+                        Console.WriteLine("The enemy hits you for " + enemyDMG + " reducing you to " + PlayerHP + "HP");
                         break;
 
 
@@ -183,6 +192,8 @@ namespace _1_v_1_text_game
                     ContinuePick(0);
             }
             }
+
+
         static void ContinuePick(int playerStreak)
         {
             string playerPick = " ";
