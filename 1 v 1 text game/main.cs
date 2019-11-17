@@ -17,6 +17,7 @@ using System.Threading.Tasks;
 ///  - Ability to create a certificate of total win streak. Output as a image file.
 ///  - Ability to Name their character, and weapon
 ///  - Loot upgrade path after each match
+///  - save state
 /// </summary>
 namespace _1_v_1_text_game
 {
