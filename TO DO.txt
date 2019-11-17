@@ -1,8 +1,0 @@
-TO DO
-- Create Turn choices(Attack Dodge Item Surrender)
-- Create Random Enemy Picker
-- Create Reward System
--- Gold
--- Glory
--- Victory Streak
-- Think of a better name.
