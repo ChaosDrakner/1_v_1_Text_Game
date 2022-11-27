@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 /// 1 v 1 battle Arena
-/// Created by ChaosDrakner
+/// Created by Chaos Witch Lizzy
 /// A game in the making where the player goes against an ememy in one on one combat.
 /// TO DO
 /// Add Random Enemy picker
